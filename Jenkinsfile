@@ -17,5 +17,11 @@ pipeline {
                 sh 'sh gradlew build'
             }
         }
+
+        stage('Sonar scan execution') {
+            steps {
+                sh 'sh gradlew -Dsonar.host.url=http://localhost:9000 sonarqube'
+            }
+        }
     }
 }

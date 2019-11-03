@@ -10,6 +10,8 @@ plugins {
 	id 'org.springframework.boot' version '2.1.8.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'net.ltgt.apt' version '0.20' // Using MapStruct
+    id "jacoco"
+    id "org.sonarqube" version "2.7"
 }
 
 ext {
@@ -43,6 +45,7 @@ sourceSets.test.runtimeClasspath += configurations.providedCompile
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -90,6 +93,9 @@ dependencies {
 	// JPA Generator
 	providedCompile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
 
+	// SonarQube
+	compile 'com.google.guava:guava:21.0'
+
 	// SpringFox Swagger Library
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: "${springfoxVersion}"
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: "${springfoxVersion}"
@@ -117,4 +123,16 @@ tasks.withType(JavaCompile) {
 
 entityGen {
 	configPath = 'src/main/resources/entityGenConfig.yml'
+}
+
+sonarqube {
+	properties {
+		property 'arakawa-api', 'arakawa api project'
+	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
 }
