@@ -1,3 +1,3 @@
-# arakawa-ec-api
+# arakawa-api
 AmazonをリスペクトしたECサイトを作ってみよう的なプロジェクト。  
 SEO的にはサーバサイドレンダリングすべきなんですが、SPAで作ります。
