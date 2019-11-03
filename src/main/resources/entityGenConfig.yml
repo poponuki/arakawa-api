@@ -1,0 +1,7 @@
+jdbcSettings:
+  url: "jdbc:postgresql://localhost:5432/arakawa"
+  username: "arakawa"
+  password: "dream"
+  driverClassName: "org.postgresql.Driver"
+
+packageName: " com.arakawa.api.entity"

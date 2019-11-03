@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    # 値がnullのプロパティーを出力しない
+    default-property-inclusion: NON_NULL
+    # JSON出力時に改行・インデントを入れる
+    serialization:
+      INDENT_OUTPUT: true

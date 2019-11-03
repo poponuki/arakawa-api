@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url:  jdbc:postgresql://db01:5432/arakawa
+    username: arakawa
+    password: dream
+    driverClassName: org.postgresql.Driver
+  security:
+    user:
+      name: arakawa
+      password: dream
