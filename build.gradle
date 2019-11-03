@@ -10,7 +10,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.8.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'net.ltgt.apt' version '0.20' // Using MapStruct
-    id "jacoco"
+    id "jacoco" version '0.8.5' // Using 
     id "org.sonarqube" version "2.7"
 }
 
@@ -20,8 +20,8 @@ ext {
 	junitjupiterVersion = "5.5.2"
 }
 
- apply plugin: 'entitygen' // JPA Generator
- apply plugin: 'net.ltgt.apt-idea'  // Using MapStruct
+apply plugin: 'entitygen' // JPA Generator
+apply plugin: 'net.ltgt.apt-idea'  // Using MapStruct
 
 group = 'com.arakawa.api'
 version = '0.0.1-SNAPSHOT'
