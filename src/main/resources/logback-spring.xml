@@ -30,7 +30,7 @@
 
     <!--Linuxサーバ(検証、本番) -->
     <springProfile name="prd">
-        <property name="logFilePath" value="/opt/arakawa-api/" />
+        <property name="logFilePath" value="/opt/arakawa-api/spring.log" />
         <property name="LOG_LEVEL" value="INFO" /> <!-- 効いていない様子-->
     </springProfile>
 
