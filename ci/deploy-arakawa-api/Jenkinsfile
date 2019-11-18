@@ -1,0 +1,40 @@
+def filename = 'arakawa-api-0.0.1-SNAPSHOT.jar'
+
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk13'
+    }
+
+    stages {
+        stage('Prepare') {
+            steps {
+                git 'https://github.com/poponuki/arakawa-api.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'sh gradlew build bootjar'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // サービスの停止
+                sh "sudo -u centos ssh api01 \"sudo systemctl stop arakawa-api\""
+
+                sh 'sudo -u centos ssh api01 sudo rm -rf /opt/arakawa-api/*'
+                sh "sudo -u centos ssh api01 sudo rm -f /tmp/${filename}"
+
+                sh "sudo -u centos scp build/libs/${filename} api01:/tmp"
+                sh "sudo -u centos ssh api01 sudo cp /tmp/${filename} /opt/arakawa-api/"
+                sh 'sudo -u centos ssh api01 sudo chown arakawa:arakawa -R /opt/arakawa-api/'
+
+                // サービスの開始
+                sh "sudo -u centos ssh api01 \"sudo systemctl start arakawa-api\""
+            }
+        }
+    }
+}
