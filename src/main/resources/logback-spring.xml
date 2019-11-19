@@ -4,34 +4,32 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
-    <!--
-        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-                <maxHistory>90</maxHistory>
-            </rollingPolicy>
-            <encoder>
-                <charset>utf-8</charset>
-                <Pattern>%d %-5level [%thread] %logger{0}: %msg%n</Pattern>
-            </encoder>
-        </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>spring.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d %-5level [%thread] %logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
 
-        <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
-            <queueSize>512</queueSize>
-            <appender-ref ref="FILE"/>
-        </appender>
-    -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
 
     <!--ローカル環境用設定 -->
     <springProfile name="dev">
-        <property name="logFilePath" value="./" />
-        <property name="LOG_LEVEL" value="INFO" /> <!-- 効いていない様子-->
+        <property name="LOG_FILE" value="./" />
+        <property name="LOG_LEVEL" value="INFO" />
     </springProfile>
 
     <!--Linuxサーバ(検証、本番) -->
     <springProfile name="prd">
-        <property name="logFilePath" value="/opt/arakawa-api/spring.log" />
-        <property name="LOG_LEVEL" value="INFO" /> <!-- 効いていない様子-->
+        <property name="LOG_FILE" value="/var/log/arakawa-api/" />
+        <property name="LOG_LEVEL" value="INFO" />
     </springProfile>
 
     <logger name="com.arakawa.api" level="#logback.loglevel#"/>
@@ -74,9 +72,7 @@
 
     <root level="#logback.loglevel#">
         <appender-ref ref="CONSOLE"/>
-        <!--
-                <appender-ref ref="FILE"/>
-        -->
+        <appender-ref ref="FILE"/>
     </root>
 
 </configuration>
