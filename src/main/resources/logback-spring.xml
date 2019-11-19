@@ -6,7 +6,7 @@
     <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>spring.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_FILE_PATH}spring.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -22,13 +22,13 @@
 
     <!--ローカル環境用設定 -->
     <springProfile name="dev">
-        <property name="LOG_FILE" value="./" />
+        <property name="LOG_FILE_PATH" value="./" />
         <property name="LOG_LEVEL" value="INFO" />
     </springProfile>
 
     <!--Linuxサーバ(検証、本番) -->
     <springProfile name="prd">
-        <property name="LOG_FILE" value="/var/log/arakawa-api/" />
+        <property name="LOG_FILE_PATH" value="/var/log/arakawa-api/" />
         <property name="LOG_LEVEL" value="INFO" />
     </springProfile>
 
